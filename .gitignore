@@ -8,3 +8,6 @@ themes/*/example/.pyssg-cache/
 # Python bytecode cache (e.g. compiled pyssg.config.py)
 __pycache__/
 *.pyc
+
+# Local virtualenv (CI builds one too, named the same)
+.venv/
