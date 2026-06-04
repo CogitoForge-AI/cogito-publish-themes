@@ -1,0 +1,18 @@
+name = "landing"
+version = "0.1.0"
+# Generic inner pages (e.g. content/pricing.md) use this template; the home page
+# opts into "index.html.j2" via its frontmatter.
+default_template = "page.html.j2"
+
+# Configurable options (theme configuration API): defaults a site overrides via
+# ``Config.theme`` and templates read as ``theme.<key>``.
+[options]
+# Initial color scheme: "auto" follows the OS preference; "light"/"dark" pin it.
+default_theme = "auto"
+# Primary accent color, fed into the ``--accent`` custom property.
+accent = "#16a34a"
+# Optional call-to-action button shown in the header (text + link).
+cta_label = "Get started"
+cta_url = "#"
+# Show the light/dark toggle in the header.
+show_theme_toggle = true

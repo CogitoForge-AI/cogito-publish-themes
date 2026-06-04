@@ -1,0 +1,63 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="l-hero">
+<div class="l-container l-hero-inner">
+{% set eyebrow = page.get('eyebrow') %}
+{% if eyebrow %}<span class="l-eyebrow">{{ eyebrow }}</span>{% endif %}
+<h1 class="l-hero-title">{{ page.get('headline') or page.title }}</h1>
+{% set subhead = page.get('subhead') %}
+{% if subhead %}<p class="l-hero-sub">{{ subhead }}</p>{% endif %}
+<div class="l-hero-actions">
+{% set cta1 = page.get('cta_primary') %}
+{% if cta1 %}<a class="l-btn l-btn-primary" href="{{ cta1.url }}">{{ cta1.label }}</a>{% endif %}
+{% set cta2 = page.get('cta_secondary') %}
+{% if cta2 %}<a class="l-btn" href="{{ cta2.url }}">{{ cta2.label }}</a>{% endif %}
+</div>
+</div>
+</section>
+
+{% set features = page.get('features') or [] %}
+{% if features %}
+<section id="features" class="l-section">
+<div class="l-container">
+<h2 class="l-section-title">{{ t("home.features") }}</h2>
+<ul class="l-feature-grid">
+{% for f in features %}
+<li class="l-feature">
+<h3>{{ f.title }}</h3>
+<p>{{ f.body }}</p>
+</li>
+{% endfor %}
+</ul>
+</div>
+</section>
+{% endif %}
+
+{% set steps = page.get('steps') or [] %}
+{% if steps %}
+<section class="l-section l-section-soft">
+<div class="l-container">
+<h2 class="l-section-title">{{ t("home.how") }}</h2>
+<ol class="l-steps">
+{% for s in steps %}
+<li class="l-step">
+<span class="l-step-num">{{ loop.index }}</span>
+<div><h3>{{ s.title }}</h3><p>{{ s.body }}</p></div>
+</li>
+{% endfor %}
+</ol>
+</div>
+</section>
+{% endif %}
+
+{% set cta = page.get('cta') %}
+{% if cta %}
+<section class="l-cta">
+<div class="l-container l-cta-inner">
+<h2>{{ cta.title }}</h2>
+{% if cta.body %}<p>{{ cta.body }}</p>{% endif %}
+{% if cta.label %}<a class="l-btn l-btn-primary l-btn-lg" href="{{ cta.url }}">{{ cta.label }}</a>{% endif %}
+</div>
+</section>
+{% endif %}
+{% endblock %}

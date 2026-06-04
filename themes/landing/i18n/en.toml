@@ -1,0 +1,16 @@
+# landing theme UI strings (base language). A site overrides any key by shipping
+# its own i18n/<lang>.toml at the site root.
+
+[nav]
+features = "Features"
+pricing = "Pricing"
+
+[theme]
+toggle = "Theme"
+
+[home]
+features = "Everything you need to ship"
+how = "How it works"
+
+[footer]
+built_with = "Built with"

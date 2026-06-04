@@ -1,0 +1,42 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="p-hero">
+<div class="p-container p-hero-inner">
+{% set avatar = page.get('avatar') %}
+{% if avatar %}<img class="p-avatar" src="{{ avatar }}" alt="{{ page.title }}" width="120" height="120">{% endif %}
+<div class="p-hero-text">
+<h1>{{ page.title }}</h1>
+{% set role = page.get('role') %}
+{% if role %}<p class="p-role">{{ role }}</p>{% endif %}
+{% set tagline = page.get('tagline') %}
+{% if tagline %}<p class="p-tagline">{{ tagline }}</p>{% endif %}
+{% set social = page.get('social') or [] %}
+{% if social %}
+<div class="p-social">
+{% for s in social %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
+</div>
+{% endif %}
+<div class="p-hero-actions">
+<a class="p-btn p-btn-primary" href="/projects/">{{ t("home.see_work") }}</a>
+</div>
+</div>
+</div>
+</section>
+
+<div class="p-container p-sections">
+{% if content_html %}
+<section class="p-about">
+<h2>{{ t("home.about") }}</h2>
+<div class="p-prose">{{ content_html }}</div>
+</section>
+{% endif %}
+
+{% set skills = page.get('skills') or [] %}
+{% if skills %}
+<section class="p-skills">
+<h2>{{ t("home.skills") }}</h2>
+<ul class="p-chips">{% for s in skills %}<li>{{ s }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+</div>
+{% endblock %}

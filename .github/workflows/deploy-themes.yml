@@ -1,0 +1,52 @@
+# Build the theme gallery and deploy it to Cloudflare Workers with Wrangler.
+#
+# Mirrors deploy-docs.yml: GitHub Actions builds the showcase site and
+# `wrangler deploy` pushes ./themes/dist to the "pyssg-themes" Worker
+# (configured in themes/wrangler.jsonc), served at themes-pyssg.nkthanh.dev.
+#
+# Requires the same two repository secrets used by the docs deploy:
+#   CLOUDFLARE_API_TOKEN   token with the "Edit Cloudflare Workers" permission
+#   CLOUDFLARE_ACCOUNT_ID  the account that owns the Worker
+name: Deploy themes
+
+# Re-deploy when the gallery site, any theme, or this workflow changes on main;
+# manual dispatch stays available for ad-hoc deploys. The whole themes/ tree is
+# watched because the gallery embeds each theme's committed screenshots and links
+# to its source.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "themes/**"
+      - ".github/workflows/deploy-themes.yml"
+  workflow_dispatch:
+
+# One deploy at a time; newer pushes supersede in-flight runs.
+concurrency:
+  group: deploy-themes
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.13"
+          enable-cache: true
+      - run: uv sync --all-extras
+      - name: Build site
+        run: uv run pyssg build
+        working-directory: themes
+      - uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: themes
+          # v4 is required to deploy a static-assets-only Worker (no `main`);
+          # the action otherwise installs an older default that errors with
+          # "Missing entry-point".
+          wranglerVersion: "4.40.0"
+          command: deploy

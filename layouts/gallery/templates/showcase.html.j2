@@ -1,0 +1,104 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<article class="g-container g-showcase">
+<nav class="g-back"><a href="/">&larr; {{ t("nav.all_themes") }}</a></nav>
+
+<header class="g-showcase-head">
+{% set category = (page.get('tags') or [None])[0] %}
+{% if category %}<span class="g-chip">{{ category }}</span>{% endif %}
+<h1>{{ page.title }}</h1>
+{% set lead = page.get('excerpt') or page.get('description') %}
+{% if lead %}<p class="g-lead">{{ lead }}</p>{% endif %}
+<div class="g-actions">
+{% set source_url = page.get('source_url') %}
+{% if source_url %}<a class="g-btn g-btn-primary" href="{{ source_url }}" target="_blank" rel="noopener">{{ t("action.source") }}</a>{% endif %}
+{% set upstream = page.get('upstream') %}
+{% set upstream_url = page.get('upstream_url') %}
+{% if upstream and upstream_url %}<a class="g-btn" href="{{ upstream_url }}" target="_blank" rel="noopener">{{ t("action.adapted_from", name=upstream) }}</a>{% endif %}
+</div>
+</header>
+
+{% set images = page.get('images') or [] %}
+{% if images %}
+<section class="g-carousel" data-carousel aria-roledescription="carousel" aria-label="{{ page.title }} screenshots">
+<div class="g-carousel-viewport">
+<ul class="g-carousel-track" data-carousel-track>
+{% for src in images %}
+<li class="g-slide" aria-roledescription="slide" aria-label="{{ loop.index }} / {{ images | length }}">
+<a href="{{ src }}" target="_blank" rel="noopener">
+<img loading="lazy" src="{{ src }}" alt="{{ page.title }} screenshot {{ loop.index }}">
+</a>
+</li>
+{% endfor %}
+</ul>
+</div>
+{% if images | length > 1 %}
+<button type="button" class="g-carousel-btn g-carousel-prev" data-carousel-prev aria-label="{{ t('carousel.prev') }}">&lsaquo;</button>
+<button type="button" class="g-carousel-btn g-carousel-next" data-carousel-next aria-label="{{ t('carousel.next') }}">&rsaquo;</button>
+<div class="g-carousel-dots" data-carousel-dots role="tablist">
+{% for src in images %}
+<button type="button" class="g-dot" data-carousel-dot aria-label="{{ t('carousel.go_to', n=loop.index) }}"></button>
+{% endfor %}
+</div>
+{% endif %}
+</section>
+<script>
+// Scroll-snap carousel: arrows + dots drive the native scroller, and an
+// IntersectionObserver keeps the active dot / disabled-arrow state in sync with
+// whatever slide is centered (clicks, swipes, or keyboard scrolling alike).
+(function () {
+  document.querySelectorAll("[data-carousel]").forEach(function (root) {
+    var track = root.querySelector("[data-carousel-track]");
+    var slides = Array.prototype.slice.call(track.children);
+    if (slides.length < 2) return;
+    var dots = Array.prototype.slice.call(root.querySelectorAll("[data-carousel-dot]"));
+    var prev = root.querySelector("[data-carousel-prev]");
+    var next = root.querySelector("[data-carousel-next]");
+    var current = 0;
+
+    function go(i) {
+      current = Math.max(0, Math.min(slides.length - 1, i));
+      slides[current].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+    function sync() {
+      dots.forEach(function (d, i) {
+        d.classList.toggle("is-active", i === current);
+        d.setAttribute("aria-selected", i === current ? "true" : "false");
+      });
+      prev.disabled = current === 0;
+      next.disabled = current === slides.length - 1;
+    }
+
+    prev.addEventListener("click", function () { go(current - 1); });
+    next.addEventListener("click", function () { go(current + 1); });
+    dots.forEach(function (d, i) { d.addEventListener("click", function () { go(i); }); });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && e.intersectionRatio >= 0.6) {
+          current = slides.indexOf(e.target);
+          sync();
+        }
+      });
+    }, { root: track, threshold: [0.6] });
+    slides.forEach(function (s) { io.observe(s); });
+    sync();
+  });
+})();
+</script>
+{% endif %}
+
+<div class="g-showcase-grid">
+<div class="g-prose">
+{{ content_html }}
+</div>
+<aside class="g-meta">
+{% set features = page.get('features') or [] %}
+{% if features %}
+<h2>{{ t("meta.features") }}</h2>
+<ul class="g-features">{% for f in features %}<li>{{ f }}</li>{% endfor %}</ul>
+{% endif %}
+</aside>
+</div>
+</article>
+{% endblock %}

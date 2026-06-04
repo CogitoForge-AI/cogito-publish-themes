@@ -1,0 +1,151 @@
+/* landing theme -- an original stylesheet (no build step; plain CSS).
+   Light/dark via the `data-theme` attribute on <html>; the accent is a runtime
+   theme option injected as `--accent`. Typography is Inter (loaded in <head>)
+   with a system-font fallback. */
+
+:root {
+  --accent: #16a34a;
+  --bg: #ffffff;
+  --bg-soft: #f4f7f5;
+  --surface: #ffffff;
+  --border: #e6ebe8;
+  --text: #0f1713;
+  --text-soft: #586a60;
+  --shadow: 0 1px 2px rgba(15, 23, 19, 0.04), 0 12px 32px rgba(15, 23, 19, 0.08);
+  --radius: 16px;
+  --maxw: 1040px;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html[data-theme="dark"] {
+  --bg: #0a0f0c;
+  --bg-soft: #0f1612;
+  --surface: #121a15;
+  --border: #20302a;
+  --text: #e8efe9;
+  --text-soft: #93a69b;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 14px 36px rgba(0, 0, 0, 0.45);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--font); font-size: 16px; line-height: 1.65;
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; }
+
+.l-container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+/* --- Navbar --- */
+.l-navbar {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.l-navbar-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.l-brand { font-weight: 800; font-size: 1.15rem; color: var(--text); }
+.l-brand:hover { text-decoration: none; }
+.l-nav { display: flex; align-items: center; gap: 18px; }
+.l-nav a { color: var(--text-soft); font-weight: 500; }
+.l-nav a:hover { color: var(--text); text-decoration: none; }
+.l-theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; padding: 0;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); cursor: pointer;
+}
+.l-theme-toggle:hover { border-color: var(--accent); }
+.l-theme-toggle .sun { display: none; }
+html[data-theme="dark"] .l-theme-toggle .sun { display: block; }
+html[data-theme="dark"] .l-theme-toggle .moon { display: none; }
+
+.l-main { flex: 1 0 auto; }
+.l-footer { border-top: 1px solid var(--border); color: var(--text-soft); text-align: center; padding: 28px 0; font-size: 0.92rem; }
+
+/* --- Buttons --- */
+.l-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 11px 20px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  font-weight: 600; font-size: 0.97rem;
+}
+.l-btn:hover { text-decoration: none; border-color: var(--accent); }
+.l-btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.l-btn-primary:hover { filter: brightness(1.07); }
+.l-btn-sm { padding: 7px 14px; font-size: 0.9rem; }
+.l-btn-lg { padding: 14px 28px; font-size: 1.05rem; }
+
+/* --- Hero --- */
+.l-hero {
+  text-align: center;
+  padding: 96px 0 72px;
+  background:
+    radial-gradient(70% 120% at 50% -20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
+}
+.l-eyebrow {
+  display: inline-block; margin-bottom: 18px;
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  padding: 5px 14px; border-radius: 999px;
+}
+.l-hero-title { font-size: 3.2rem; font-weight: 800; margin: 0 auto 18px; max-width: 16ch; }
+.l-hero-sub { font-size: 1.25rem; color: var(--text-soft); margin: 0 auto 30px; max-width: 60ch; }
+.l-hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* --- Sections --- */
+.l-section { padding: 72px 0; }
+.l-section-soft { background: var(--bg-soft); }
+.l-section-title { text-align: center; font-size: 2rem; margin: 0 0 44px; }
+
+.l-feature-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.l-feature {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 26px;
+}
+.l-feature h3 { font-size: 1.2rem; margin: 0 0 8px; }
+.l-feature p { color: var(--text-soft); margin: 0; }
+
+.l-steps { list-style: none; margin: 0 auto; padding: 0; max-width: 720px; display: grid; gap: 26px; }
+.l-step { display: flex; gap: 18px; align-items: flex-start; }
+.l-step-num {
+  flex: none; width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #fff; background: var(--accent);
+}
+.l-step h3 { margin: 4px 0 6px; font-size: 1.15rem; }
+.l-step p { color: var(--text-soft); margin: 0; }
+
+/* --- CTA band --- */
+.l-cta { padding: 84px 0; text-align: center; }
+.l-cta-inner h2 { font-size: 2.1rem; margin: 0 0 12px; }
+.l-cta-inner p { color: var(--text-soft); font-size: 1.15rem; margin: 0 auto 28px; max-width: 52ch; }
+
+/* --- Inner page --- */
+.l-page { padding: 56px 0 24px; max-width: 760px; }
+.l-page-head h1 { font-size: 2.4rem; margin: 0 0 12px; }
+.l-lead { font-size: 1.2rem; color: var(--text-soft); margin: 0 0 8px; }
+.l-prose { font-size: 1.04rem; }
+.l-prose h2 { margin-top: 1.6em; }
+.l-prose code { background: var(--bg-soft); padding: 0.15em 0.4em; border-radius: 5px; font-size: 0.9em; }
+.l-prose pre { background: var(--bg-soft); padding: 16px; border-radius: 10px; overflow: auto; border: 1px solid var(--border); }
+.l-prose table { border-collapse: collapse; width: 100%; }
+.l-prose th, .l-prose td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .l-hero { padding: 64px 0 48px; }
+  .l-hero-title { font-size: 2.3rem; }
+  .l-section { padding: 52px 0; }
+  .l-container { padding: 0 18px; }
+}

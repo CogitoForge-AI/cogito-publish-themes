@@ -1,0 +1,10 @@
+# Build artifacts for the gallery site and every theme's example/ demo.
+# Screenshots under themes/<theme>/screenshots/ are source assets and ARE committed.
+dist/
+.pyssg-cache/
+themes/*/example/dist/
+themes/*/example/.pyssg-cache/
+
+# Python bytecode cache (e.g. compiled pyssg.config.py)
+__pycache__/
+*.pyc

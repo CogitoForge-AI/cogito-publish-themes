@@ -1,0 +1,13 @@
+name = "gallery"
+version = "0.1.0"
+# Per-theme showcase pages (content/showcase/*.md) render with this template; the
+# home grid is a collection index page that picks "index.html.j2" explicitly.
+default_template = "showcase.html.j2"
+
+# Configurable options (theme configuration API): defaults a site overrides via
+# ``Config.theme`` and templates read as ``theme.<key>``.
+[options]
+# Initial color scheme: "auto" follows the OS preference; "light"/"dark" pin it.
+default_theme = "auto"
+# Primary accent color, fed into the ``--accent`` custom property.
+accent = "#7c5cff"

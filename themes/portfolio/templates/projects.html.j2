@@ -1,0 +1,22 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<div class="p-container p-sections">
+<header class="p-page-head">
+<h1>{{ page.title or t("nav.projects") }}</h1>
+{% if content_html %}<div class="p-prose">{{ content_html }}</div>{% endif %}
+</header>
+{% set items = page.get('items') or [] %}
+<ul class="p-project-grid">
+{% for item in items %}
+<li class="p-project-card">
+<a class="p-project-link" href="{{ item.url }}">
+<h2 class="p-project-title">{{ item.title }}</h2>
+{% if item.excerpt %}<p class="p-project-excerpt">{{ item.excerpt }}</p>{% endif %}
+{% if item.tags %}<ul class="p-chips p-chips-sm">{% for t in item.tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+<span class="p-project-more">{{ t("projects.view") }} &rarr;</span>
+</a>
+</li>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}

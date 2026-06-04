@@ -1,0 +1,11 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<article class="l-container l-page">
+<header class="l-page-head">
+<h1>{{ page.title }}</h1>
+{% set lead = page.get('description') or page.get('subhead') %}
+{% if lead %}<p class="l-lead">{{ lead }}</p>{% endif %}
+</header>
+<div class="l-prose">{{ content_html }}</div>
+</article>
+{% endblock %}

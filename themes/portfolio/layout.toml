@@ -1,0 +1,15 @@
+name = "portfolio"
+version = "0.1.0"
+# Project detail pages (content/projects/*.md) use this template; the home page
+# opts into "index.html.j2" and the /projects/ grid into "projects.html.j2".
+default_template = "project.html.j2"
+
+# Configurable options (theme configuration API): defaults a site overrides via
+# ``Config.theme`` and templates read as ``theme.<key>``.
+[options]
+# Initial color scheme: "auto" follows the OS preference; "light"/"dark" pin it.
+default_theme = "auto"
+# Primary accent color, fed into the ``--accent`` custom property.
+accent = "#2563eb"
+# Show the light/dark toggle in the header.
+show_theme_toggle = true

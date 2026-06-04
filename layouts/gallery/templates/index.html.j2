@@ -1,0 +1,31 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="g-hero">
+<div class="g-container">
+<h1>{{ t("hero.title") }}</h1>
+<p class="g-hero-lead">{{ t("hero.lead") }}</p>
+</div>
+</section>
+<section class="g-container g-gallery">
+{% set items = page.get('items') or [] %}
+<p class="g-count">{{ t("gallery.count", n=items|length) }}</p>
+<ul class="g-grid">
+{% for item in items %}
+{% set slug = item.url.strip('/').split('/')[-1] %}
+{% set category = item.tags[0] if item.tags else "" %}
+<li class="g-card">
+<a class="g-card-link" href="{{ item.url }}">
+<div class="g-card-shot">
+<img loading="lazy" src="/screenshots/{{ slug }}/01-home.png" alt="{{ item.title }} screenshot" width="1280" height="900">
+</div>
+<div class="g-card-body">
+{% if category %}<span class="g-chip">{{ category }}</span>{% endif %}
+<h2 class="g-card-title">{{ item.title }}</h2>
+{% if item.excerpt %}<p class="g-card-excerpt">{{ item.excerpt }}</p>{% endif %}
+</div>
+</a>
+</li>
+{% endfor %}
+</ul>
+</section>
+{% endblock %}

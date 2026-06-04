@@ -1,0 +1,32 @@
+# gallery layout UI strings (base language). A site overrides any key by
+# shipping its own i18n/<lang>.toml at the site root.
+
+[nav]
+themes = "Themes"
+pyssg = "pyssg"
+all_themes = "All themes"
+
+[theme]
+toggle = "Theme"
+
+[hero]
+title = "pyssg themes"
+lead = "A gallery of ready-to-use themes for pyssg. Every theme below is built and screenshotted with pyssg itself."
+
+[gallery]
+count = "{n} themes"
+
+[action]
+source = "View source"
+adapted_from = "Adapted from {name}"
+
+[carousel]
+prev = "Previous screenshot"
+next = "Next screenshot"
+go_to = "Go to screenshot {n}"
+
+[meta]
+features = "Features"
+
+[footer]
+tagline = "A showcase of themes, built with"

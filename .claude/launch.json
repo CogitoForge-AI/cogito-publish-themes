@@ -1,0 +1,41 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gallery",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--project", "../pyssg", "pyssg", "--site", ".", "serve", "--port", "8000"],
+      "port": 8000
+    },
+    {
+      "name": "blog-minimal-example",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--project", "../pyssg", "pyssg", "--site", "themes/blog-minimal/example", "serve", "--port", "8001"],
+      "port": 8001
+    },
+    {
+      "name": "blog-technical-example",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--project", "../pyssg", "pyssg", "--site", "themes/blog-technical/example", "serve", "--port", "8002"],
+      "port": 8002
+    },
+    {
+      "name": "docs-technical-example",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--project", "../pyssg", "pyssg", "--site", "themes/docs-technical/example", "serve", "--port", "8003"],
+      "port": 8003
+    },
+    {
+      "name": "portfolio-example",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--project", "../pyssg", "pyssg", "--site", "themes/portfolio/example", "serve", "--port", "8004"],
+      "port": 8004
+    },
+    {
+      "name": "landing-example",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--project", "../pyssg", "pyssg", "--site", "themes/landing/example", "serve", "--port", "8005"],
+      "port": 8005
+    }
+  ]
+}

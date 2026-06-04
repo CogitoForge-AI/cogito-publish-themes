@@ -1,0 +1,25 @@
+# portfolio theme UI strings (base language). A site overrides any key by
+# shipping its own i18n/<lang>.toml at the site root.
+
+[nav]
+home = "Home"
+projects = "Projects"
+
+[theme]
+toggle = "Theme"
+
+[home]
+see_work = "See my work"
+about = "About"
+skills = "Skills"
+
+[projects]
+view = "View project"
+all = "All projects"
+
+[project]
+live = "Live site"
+source = "Source"
+
+[footer]
+built_with = "Built with"
