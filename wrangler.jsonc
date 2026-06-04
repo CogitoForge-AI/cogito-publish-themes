@@ -1,5 +1,5 @@
 {
-  // Static-assets-only Worker for the pyssg theme gallery (themes-pyssg.nkthanh.dev).
+  // Static-assets-only Worker for the PySSG theme gallery (themes-pyssg.nkthanh.dev).
   // `pyssg build` writes the site to ./dist, which Cloudflare serves directly;
   // no Worker script (`main`) is needed for a pure static deployment. Mirrors
   // docs/wrangler.jsonc.

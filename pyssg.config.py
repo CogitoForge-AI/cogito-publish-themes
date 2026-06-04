@@ -1,6 +1,6 @@
-"""Configuration for the pyssg theme gallery -- a themes.gohugo.io-style showcase.
+"""Configuration for the PySSG theme gallery -- a themes.gohugo.io-style showcase.
 
-The gallery is itself a pyssg site (dogfooding). Each theme has a showcase page
+The gallery is itself a PySSG site (dogfooding). Each theme has a showcase page
 under ``content/showcase/<slug>.md``; a ``themes`` collection turns those pages
 into the home grid (``/``), and the per-theme detail page lives at
 ``/showcase/<slug>/``. Each theme's screenshots are mounted from
@@ -38,7 +38,7 @@ _gallery = CollectionSpec(
     select=lambda item: item.section == "showcase",
     sort_key=lambda item: item.title.lower(),
     pagination=Pagination(size=100, route="/", template="index.html.j2"),
-    title="pyssg themes",
+    title="PySSG themes",
 )
 
 config = Config(
@@ -47,8 +47,8 @@ config = Config(
     layout="layouts/gallery",
     base_url="https://themes-pyssg.nkthanh.dev",
     site={
-        "title": "pyssg themes",
-        "description": "A gallery of ready-to-use themes for pyssg.",
+        "title": "PySSG themes",
+        "description": "A gallery of ready-to-use themes for PySSG.",
     },
     plugins=[
         directory_loader(),

@@ -7,7 +7,7 @@
  *
  * The CSS below is concatenated from PaperMod's plain stylesheets (core +
  * common) in the upstream load order. Code-block colors are supplied separately
- * by pyssg's highlight plugin (injected inline by base.html.j2), so PaperMod's
+ * by PySSG's highlight plugin (injected inline by base.html.j2), so PaperMod's
  * chroma stylesheets are intentionally omitted.
  */
 :root {

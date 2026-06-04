@@ -3,15 +3,15 @@
 
 [nav]
 themes = "Themes"
-pyssg = "pyssg"
+pyssg = "PySSG"
 all_themes = "All themes"
 
 [theme]
 toggle = "Theme"
 
 [hero]
-title = "pyssg themes"
-lead = "A gallery of ready-to-use themes for pyssg. Every theme below is built and screenshotted with pyssg itself."
+title = "PySSG themes"
+lead = "A gallery of ready-to-use themes for PySSG. Every theme below is built and screenshotted with PySSG itself."
 
 [gallery]
 count = "{n} themes"

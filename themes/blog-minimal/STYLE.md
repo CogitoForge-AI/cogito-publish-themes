@@ -1,7 +1,7 @@
 # blog-minimal stylesheet provenance
 
 `assets/style.css` is generated offline from [hugo-coder](https://github.com/luizdepra/hugo-coder)
-(MIT). The pyssg build does not compile SCSS; only the resulting static CSS is
+(MIT). The PySSG build does not compile SCSS; only the resulting static CSS is
 shipped. To regenerate after updating the subset:
 
 - Source: hugo-coder at commit `3d3bbd75d7bb46a4670af89442cf0b961440bd4e`

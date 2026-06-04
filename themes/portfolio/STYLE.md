@@ -1,13 +1,13 @@
 # portfolio -- style notes
 
-The stylesheet (`assets/style.css`) is **original** to pyssg: it is hand-written
+The stylesheet (`assets/style.css`) is **original** to PySSG: it is hand-written
 plain CSS, not compiled from any upstream theme's SCSS, and the layout/markup are
 original too. The design is *inspired by* the common personal-portfolio
 archetype (hero with avatar + role, an about section, a skills chip row, and a
 project grid backed by detail pages) rather than reproducing a specific theme.
 
 Because the CSS is original there is no `THEME-LICENSE` (the repository LICENSE
-applies) and there is no SCSS build step -- pyssg ships only the static CSS.
+applies) and there is no SCSS build step -- PySSG ships only the static CSS.
 
 ## Typography
 
