@@ -1,8 +1,10 @@
 # Build the theme gallery and deploy it to Cloudflare Workers with Wrangler.
 #
-# Mirrors deploy-docs.yml: GitHub Actions builds the showcase site and
-# `wrangler deploy` pushes ./themes/dist to the "pyssg-themes" Worker
-# (configured in themes/wrangler.jsonc), served at themes-pyssg.nkthanh.dev.
+# GitHub Actions builds the showcase site (the repo root is the PySSG site) and
+# `wrangler deploy` pushes ./dist to the "pyssg-themes" Worker (configured in
+# wrangler.jsonc), served at themes-pyssg.nkthanh.dev. PySSG is not on PyPI under
+# this name, so it is installed straight from its repo with `uv pip install` --
+# this gallery has no pyproject.toml of its own.
 #
 # Requires the same two repository secrets used by the docs deploy:
 #   CLOUDFLARE_API_TOKEN   token with the "Edit Cloudflare Workers" permission
@@ -10,14 +12,18 @@
 name: Deploy themes
 
 # Re-deploy when the gallery site, any theme, or this workflow changes on main;
-# manual dispatch stays available for ad-hoc deploys. The whole themes/ tree is
-# watched because the gallery embeds each theme's committed screenshots and links
-# to its source.
+# manual dispatch stays available for ad-hoc deploys. The whole site is watched
+# because the gallery embeds each theme's committed screenshots and links to its
+# source.
 on:
   push:
     branches: [main]
     paths:
       - "themes/**"
+      - "content/**"
+      - "layouts/**"
+      - "pyssg.config.py"
+      - "wrangler.jsonc"
       - ".github/workflows/deploy-themes.yml"
   workflow_dispatch:
 
@@ -36,15 +42,17 @@ jobs:
         with:
           python-version: "3.13"
           enable-cache: true
-      - run: uv sync --all-extras
+      # Install PySSG from its repo into a local venv -- no pyproject.toml needed.
+      - name: Install PySSG
+        run: |
+          uv venv
+          uv pip install "git+https://github.com/magiskboy/pyssg.git"
       - name: Build site
-        run: uv run pyssg build
-        working-directory: themes
+        run: .venv/bin/pyssg build
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: themes
           # v4 is required to deploy a static-assets-only Worker (no `main`);
           # the action otherwise installs an older default that errors with
           # "Missing entry-point".
