@@ -1,7 +1,7 @@
 ---
 title: About
 ---
-**The Rendered Web** is a small example blog that ships with pyssg. It exists to
+**The Rendered Web** is a small example blog that ships with PySSG. It exists to
 show what the `blog` preset produces out of the box: a paginated, newest-first
 home page, per-post pages with reading time and tags, tag archives, an RSS feed,
 and a sitemap -- all from plain Markdown and a one-line config.
