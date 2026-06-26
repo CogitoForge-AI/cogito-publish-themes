@@ -1,15 +1,9 @@
-# Build the theme gallery and deploy it to Cloudflare Workers with Wrangler.
+# Build the theme gallery and deploy it with GitHub Pages Actions.
 #
-# GitHub Actions builds the showcase site (the repo root is the Cogito Publish
-# site) and `wrangler deploy` pushes ./dist to the "cogito-publish-themes"
-# Worker (configured in wrangler.jsonc), served at
-# publish-themes.cogito-ai.org. Cogito Publish is not on PyPI under this CLI
-# name, so it is installed straight from its repo with `uv pip install` -- this
-# gallery has no pyproject.toml of its own.
-#
-# Requires the same two repository secrets used by the docs deploy:
-#   CLOUDFLARE_API_TOKEN   token with the "Edit Cloudflare Workers" permission
-#   CLOUDFLARE_ACCOUNT_ID  the account that owns the Worker
+# GitHub Actions builds the showcase site at the repo root, uploads `./dist` as
+# a Pages artifact, and deploys it to the repository's GitHub Pages
+# environment. A `CNAME` file is written during the build job so the published
+# site resolves at `publish-themes.cogito-ai.org`.
 name: Deploy themes
 
 # Re-deploy when the gallery site, any theme, or this workflow changes on main;
@@ -24,7 +18,6 @@ on:
       - "content/**"
       - "layouts/**"
       - "pyssg.config.py"
-      - "wrangler.jsonc"
       - ".github/workflows/deploy-themes.yml"
   workflow_dispatch:
 
@@ -33,9 +26,14 @@ concurrency:
   group: deploy-themes
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  deploy:
-    name: Build and deploy
+  build:
+    name: Build site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -49,14 +47,25 @@ jobs:
         run: |
           uv venv
           uv pip install "git+https://github.com/CogitoForge-AI/cogito-publish.git"
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
       - name: Build site
-        run: .venv/bin/cogito-publish build
-      - uses: cloudflare/wrangler-action@v4
+        run: |
+          .venv/bin/cogito-publish build
+          printf 'publish-themes.cogito-ai.org\n' > dist/CNAME
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # v4 is required to deploy a static-assets-only Worker (no `main`);
-          # the action otherwise installs an older default that errors with
-          # "Missing entry-point".
-          wranglerVersion: "4.40.0"
-          command: deploy
+          path: ./dist
+
+  deploy:
+    name: Deploy site
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

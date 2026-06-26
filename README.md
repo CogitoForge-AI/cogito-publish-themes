@@ -93,7 +93,7 @@ showcase. Its pieces:
   layouts/gallery/           # the gallery's own layout (templates + CSS)
   themes/<theme>/screenshots/  # 5 committed screenshots per theme, embedded by the gallery
   themes/<theme>/example/      # a minimal demo site per theme (also the screenshot source)
-  wrangler.jsonc             # Cloudflare Worker ("cogito-publish-themes") for the deploy
+  .github/workflows/deploy-themes.yml  # GitHub Pages build + deploy pipeline
 ```
 
 Adding a theme to the showcase is three steps: drop its screenshots under
@@ -127,8 +127,7 @@ with your headless browser of choice, overwriting the files in place.
 ### Deployment
 
 A push to `main` that touches `themes/**` triggers
-`.github/workflows/deploy-themes.yml`, which builds the site and runs
-`wrangler deploy` against the `cogito-publish-themes` Worker (see `wrangler.jsonc`),
-exactly like the docs deploy. The custom domain `publish-themes.cogito-ai.org` is
-attached to that Worker through the Cloudflare dashboard (Workers route / custom
-domain) -- a one-time setup outside this repo.
+`.github/workflows/deploy-themes.yml`, which builds the site, uploads `dist/`
+as a GitHub Pages artifact, and deploys it through the repository's
+`github-pages` environment. The workflow also writes a `CNAME` file so the
+published site resolves at `publish-themes.cogito-ai.org`.
