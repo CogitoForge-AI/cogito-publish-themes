@@ -3,15 +3,15 @@
 
 [nav]
 themes = "Themes"
-pyssg = "PySSG"
+pyssg = "Cogito Publish"
 all_themes = "All themes"
 
 [theme]
 toggle = "Theme"
 
 [hero]
-title = "PySSG themes"
-lead = "A gallery of ready-to-use themes for PySSG. Every theme below is built and screenshotted with PySSG itself."
+title = "Cogito Publish Themes"
+lead = "A gallery of ready-to-use themes for Cogito Publish. Every theme below is built and screenshotted with Cogito Publish itself."
 
 [gallery]
 count = "{n} themes"

@@ -3,7 +3,7 @@ title: Portfolio
 excerpt: A personal portfolio and resume -- hero, about, skills, and a project grid with detail pages.
 tags: [Portfolio]
 upstream: original
-source_url: https://github.com/magiskboy/pyssg/tree/main/themes/themes/portfolio
+source_url: https://github.com/CogitoForge-AI/cogito-publish-themes/tree/main/themes/portfolio
 features:
   - Hero with role, tagline, and social links
   - About section and skills chips
@@ -21,7 +21,7 @@ images:
 you, a short about section, a row of skill chips, and a grid of projects that
 each open into a full case-study page with a tech stack and links.
 
-It is an original PySSG theme (hand-written CSS, Inter typography) inspired by
+It is an original Cogito Publish theme (hand-written CSS, Inter typography) inspired by
 the common personal-portfolio archetype rather than a port of a specific theme.
 Drive the home page from frontmatter and add a Markdown file under
 `content/projects/` for each project.

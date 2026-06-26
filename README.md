@@ -1,14 +1,16 @@
-# PySSG theme gallery
+# Cogito Publish Themes Gallery
 
-This directory is a **gallery of standalone themes** for PySSG. Unlike the
-built-in themes under `pyssg/themes/` (which ship inside the `pyssg` wheel),
-themes here are **source-only**: they are not packaged or installed with PySSG.
-They are meant to be adopted into a site by vendoring (copy the theme directory
-into your project) and pointing `Config.layout` at it.
+This directory is a **gallery of standalone themes** for Cogito Publish. Unlike
+the built-in themes under `pyssg/themes/` (which still ship inside the `pyssg`
+wheel for compatibility), themes here are **source-only**: they are not
+packaged or installed with the runtime itself. They are meant to be adopted
+into a site by vendoring (copy the theme directory into your project) and
+pointing `Config.layout` at it.
 
-It is **also a PySSG site itself**: `themes/` builds into a
+It is **also a Cogito Publish site itself**: `themes/` builds into a
 [themes.gohugo.io](https://themes.gohugo.io/)-style **showcase** (built with
-PySSG, dogfooding) published at **https://themes-pyssg.nkthanh.dev**. See
+[Cogito Publish](https://github.com/CogitoForge-AI/cogito-publish), dogfooding)
+published at **https://publish-themes.cogito-ai.org**. See
 [The showcase site](#the-showcase-site) below.
 
 ```python
@@ -76,22 +78,22 @@ conventional names where they apply, currently:
 | `landing` | original (CSS + layout) | Product/SaaS landing: hero, feature grid, "how it works", closing CTA. |
 
 Themes whose stylesheet is compiled offline from upstream SCSS document the exact
-source commit and reproduction command in their `STYLE.md` (the PySSG build never
+source commit and reproduction command in their `STYLE.md` (the Cogito Publish build never
 compiles SCSS; only the static CSS is shipped).
 
 ## The showcase site
 
-`themes/` doubles as a PySSG site that renders the gallery above into a browsable
+This repository doubles as a Cogito Publish site that renders the gallery above into a browsable
 showcase. Its pieces:
 
 ```
-themes/
+. 
   pyssg.config.py            # the gallery site config (a "themes" collection -> home grid)
   content/showcase/          # one Markdown page per theme (card + detail page)
   layouts/gallery/           # the gallery's own layout (templates + CSS)
   themes/<theme>/screenshots/  # 5 committed screenshots per theme, embedded by the gallery
   themes/<theme>/example/      # a minimal demo site per theme (also the screenshot source)
-  wrangler.jsonc             # Cloudflare Worker ("pyssg-themes") for the deploy
+  wrangler.jsonc             # Cloudflare Worker ("cogito-publish-themes") for the deploy
 ```
 
 Adding a theme to the showcase is three steps: drop its screenshots under
@@ -103,14 +105,14 @@ into the output.
 ### Build and preview locally
 
 ```bash
-uv run pyssg --site themes serve     # the gallery at http://127.0.0.1:8000
-uv run pyssg --site themes build     # one-shot build into themes/dist
+uv run --project ../cogito-publish cogito-publish --site . serve
+uv run --project ../cogito-publish cogito-publish --site . build
 ```
 
 Each theme also ships a demo you can run on its own:
 
 ```bash
-uv run pyssg --site themes/themes/<theme>/example serve
+uv run --project ../cogito-publish cogito-publish --site themes/<theme>/example serve
 ```
 
 ### Regenerating screenshots
@@ -119,14 +121,14 @@ Screenshots are committed source assets (not build output). Each theme has five
 under `<theme>/screenshots/` -- a home/list view, a content view, an archive
 view, a dark-mode view, and a mobile view -- captured from the theme's
 `example/` demo at a uniform viewport. Rebuild a theme's demo
-(`pyssg --site themes/themes/<theme>/example build`), serve its `dist/`, and recapture
+(`cogito-publish --site themes/<theme>/example build`), serve its `dist/`, and recapture
 with your headless browser of choice, overwriting the files in place.
 
 ### Deployment
 
 A push to `main` that touches `themes/**` triggers
 `.github/workflows/deploy-themes.yml`, which builds the site and runs
-`wrangler deploy` against the `pyssg-themes` Worker (see `wrangler.jsonc`),
-exactly like the docs deploy. The custom domain `themes-pyssg.nkthanh.dev` is
+`wrangler deploy` against the `cogito-publish-themes` Worker (see `wrangler.jsonc`),
+exactly like the docs deploy. The custom domain `publish-themes.cogito-ai.org` is
 attached to that Worker through the Cloudflare dashboard (Workers route / custom
 domain) -- a one-time setup outside this repo.

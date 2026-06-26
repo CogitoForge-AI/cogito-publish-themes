@@ -1,6 +1,6 @@
-"""Configuration for the PySSG theme gallery -- a themes.gohugo.io-style showcase.
+"""Configuration for the Cogito Publish Themes gallery -- a themes.gohugo.io-style showcase.
 
-The gallery is itself a PySSG site (dogfooding). Each theme has a showcase page
+The gallery is itself a Cogito Publish site (dogfooding). Each theme has a showcase page
 under ``content/showcase/<slug>.md``; a ``themes`` collection turns those pages
 into the home grid (``/``), and the per-theme detail page lives at
 ``/showcase/<slug>/``. Each theme's screenshots are mounted from
@@ -38,17 +38,17 @@ _gallery = CollectionSpec(
     select=lambda item: item.section == "showcase",
     sort_key=lambda item: item.title.lower(),
     pagination=Pagination(size=100, route="/", template="index.html.j2"),
-    title="PySSG themes",
+    title="Cogito Publish Themes",
 )
 
 config = Config(
     content_dir="content",
     output_dir="dist",
     layout="layouts/gallery",
-    base_url="https://themes-pyssg.nkthanh.dev",
+    base_url="https://publish-themes.cogito-ai.org",
     site={
-        "title": "PySSG themes",
-        "description": "A gallery of ready-to-use themes for PySSG.",
+        "title": "Cogito Publish Themes",
+        "description": "A gallery of ready-to-use themes for Cogito Publish.",
     },
     plugins=[
         directory_loader(),

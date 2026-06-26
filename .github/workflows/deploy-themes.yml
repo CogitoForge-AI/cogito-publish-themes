@@ -1,10 +1,11 @@
 # Build the theme gallery and deploy it to Cloudflare Workers with Wrangler.
 #
-# GitHub Actions builds the showcase site (the repo root is the PySSG site) and
-# `wrangler deploy` pushes ./dist to the "pyssg-themes" Worker (configured in
-# wrangler.jsonc), served at themes-pyssg.nkthanh.dev. PySSG is not on PyPI under
-# this name, so it is installed straight from its repo with `uv pip install` --
-# this gallery has no pyproject.toml of its own.
+# GitHub Actions builds the showcase site (the repo root is the Cogito Publish
+# site) and `wrangler deploy` pushes ./dist to the "cogito-publish-themes"
+# Worker (configured in wrangler.jsonc), served at
+# publish-themes.cogito-ai.org. Cogito Publish is not on PyPI under this CLI
+# name, so it is installed straight from its repo with `uv pip install` -- this
+# gallery has no pyproject.toml of its own.
 #
 # Requires the same two repository secrets used by the docs deploy:
 #   CLOUDFLARE_API_TOKEN   token with the "Edit Cloudflare Workers" permission
@@ -42,13 +43,14 @@ jobs:
         with:
           python-version: "3.13"
           enable-cache: true
-      # Install PySSG from its repo into a local venv -- no pyproject.toml needed.
-      - name: Install PySSG
+      # Install Cogito Publish from its repo into a local venv -- no
+      # pyproject.toml needed in this gallery repository.
+      - name: Install Cogito Publish
         run: |
           uv venv
-          uv pip install "git+https://github.com/magiskboy/pyssg.git"
+          uv pip install "git+https://github.com/CogitoForge-AI/cogito-publish.git"
       - name: Build site
-        run: .venv/bin/pyssg build
+        run: .venv/bin/cogito-publish build
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

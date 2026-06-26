@@ -1,6 +1,6 @@
 # landing -- style notes
 
-The stylesheet (`assets/style.css`) is **original** to PySSG: hand-written plain
+The stylesheet (`assets/style.css`) is **original** to Cogito Publish: hand-written plain
 CSS, not compiled from any upstream theme's SCSS, and the layout/markup are
 original too. The design is *inspired by* the common product/SaaS landing-page
 archetype (a centered hero with an eyebrow pill and dual CTAs, a feature grid, a
@@ -8,7 +8,7 @@ numbered "how it works" section, and a closing call-to-action band) rather than
 reproducing a specific theme.
 
 Because the CSS is original there is no `THEME-LICENSE` (the repository LICENSE
-applies) and there is no SCSS build step -- PySSG ships only the static CSS.
+applies) and there is no SCSS build step -- Cogito Publish ships only the static CSS.
 
 ## Typography
 

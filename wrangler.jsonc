@@ -1,9 +1,9 @@
 {
-  // Static-assets-only Worker for the PySSG theme gallery (themes-pyssg.nkthanh.dev).
-  // `pyssg build` writes the site to ./dist, which Cloudflare serves directly;
+  // Static-assets-only Worker for the Cogito Publish Themes gallery (publish-themes.cogito-ai.org).
+  // `cogito-publish build` writes the site to ./dist, which Cloudflare serves directly;
   // no Worker script (`main`) is needed for a pure static deployment. Mirrors
   // docs/wrangler.jsonc.
-  "name": "pyssg-themes",
+  "name": "cogito-publish-themes",
   "compatibility_date": "2025-05-01",
   "assets": {
     "directory": "./dist"

@@ -4,7 +4,7 @@ excerpt: A feature-rich blog for technical writing -- TOC, tags, reading time, a
 tags: [Blog]
 upstream: hugo-PaperMod
 upstream_url: https://github.com/adityatelange/hugo-PaperMod
-source_url: https://github.com/magiskboy/pyssg/tree/main/themes/themes/blog-technical
+source_url: https://github.com/CogitoForge-AI/cogito-publish-themes/tree/main/themes/blog-technical
 features:
   - Table of contents on post pages
   - Reading time and tag chips

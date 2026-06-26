@@ -4,7 +4,7 @@ excerpt: A clean, typography-first blog with a light/dark toggle. Nothing you do
 tags: [Blog]
 upstream: hugo-coder
 upstream_url: https://github.com/luizdepra/hugo-coder
-source_url: https://github.com/magiskboy/pyssg/tree/main/themes/themes/blog-minimal
+source_url: https://github.com/CogitoForge-AI/cogito-publish-themes/tree/main/themes/blog-minimal
 features:
   - Paginated, newest-first post list
   - Per-post pages with reading time and tags

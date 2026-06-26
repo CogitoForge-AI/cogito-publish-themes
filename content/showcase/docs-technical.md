@@ -4,7 +4,7 @@ excerpt: A documentation theme with a navbar, sidebar nav, on-this-page TOC, and
 tags: [Docs]
 upstream: docsy
 upstream_url: https://github.com/google/docsy
-source_url: https://github.com/magiskboy/pyssg/tree/main/themes/themes/docs-technical
+source_url: https://github.com/CogitoForge-AI/cogito-publish-themes/tree/main/themes/docs-technical
 features:
   - Top navbar and left navigation sidebar
   - On-this-page table of contents

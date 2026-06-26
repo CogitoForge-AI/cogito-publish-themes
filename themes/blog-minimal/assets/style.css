@@ -6,7 +6,7 @@
  * de Prá. See THEME-LICENSE in this directory.
  *
  * This stylesheet is generated offline from coder's SCSS (light + dark); the
- * PySSG build itself ships only this static CSS and never compiles SCSS. The
+ * Cogito Publish itself ships only this static CSS and never compiles SCSS. The
  * subset excludes font-awesome, notices, tabs, the float toggle widget, and
  * mastodon. See STYLE.md for the exact source commit and the reproduction
  * command.

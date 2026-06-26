@@ -1,4 +1,4 @@
-/* PySSG theme gallery -- a small, original stylesheet for the showcase site.
+/* Cogito Publish Themes gallery -- a small, original stylesheet for the showcase site.
    Light/dark is driven by the `data-theme` attribute on <html>; the accent is a
    runtime theme option injected as `--accent`. No build step: this is plain CSS. */
 
